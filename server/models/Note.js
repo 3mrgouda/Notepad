@@ -2,18 +2,19 @@ import mongoose from "mongoose";
 
 const NoteSchema = new mongoose.Schema({
   userId: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
     required: [true, "Please add a userId"],
   },
   title: {
     type: String,
     required: [true, "Please add a title"],
-    maxLength: [40, "Title can not be more than 40 characters"],
+    maxLength: [40, "Title cannot be more than 40 characters"],
   },
   description: {
     type: String,
-    required: true,
-    maxLength: [200, "Description can not be more than 200 characters"],
+    required: [true, "Please add a description"],
+    maxLength: [200, "Description cannot be more than 200 characters"],
   },
   color: {
     type: String,
