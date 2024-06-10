@@ -4,12 +4,14 @@ import dotenv from "dotenv";
 import notes from "./routes/notes.js";
 import users from "./routes/users.js";
 import { connectDB } from "./config/db.js";
+import cors from "cors";
 dotenv.config({
   path: "./config/.env",
 });
 const app = express();
 app.use(express.json());
 app.use(morgan("dev"));
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
