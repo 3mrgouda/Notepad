@@ -9,6 +9,8 @@ import Register from "./pages/register";
 import Login from "./pages/login";
 import PrivateRoutes from "./utils/PrivateRoutes";
 import Notes from "./pages/Notes";
+import CreateNote from "./pages/CreateNote";
+import UpdateNote from "./pages/UpdateNote";
 
 export default function App() {
   const { user } = useAuth();
@@ -20,6 +22,8 @@ export default function App() {
       <Routes>
         <Route element={<PrivateRoutes />}>
           <Route path="/notes" element={<Notes />} />
+          <Route path="/notes/create" element={<CreateNote />} />
+          <Route path="/notes/:id" element={<UpdateNote />} />
         </Route>
         <Route path="/" element={<Home />} />
         <Route
