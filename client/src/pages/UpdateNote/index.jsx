@@ -13,6 +13,7 @@ export default function UpdateNote() {
 
   const { user } = useAuth();
   const { id } = useParams();
+  const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
   const getNote = async () => {
     try {
@@ -50,7 +51,7 @@ export default function UpdateNote() {
     };
 
     try {
-      const res = await fetch(`http://localhost:3000/api/v1/notes/${id}`, {
+      const res = await fetch(` ${apiUrl}/notes/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

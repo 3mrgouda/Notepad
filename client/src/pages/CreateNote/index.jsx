@@ -10,6 +10,7 @@ export default function CreateNote() {
   const { user } = useAuth();
 
   const navigate = useNavigate();
+  const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,7 +21,7 @@ export default function CreateNote() {
       color,
     };
 
-    const res = await fetch("http://localhost:3000/api/v1/notes", {
+    const res = await fetch(`${apiUrl}/notes`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -35,8 +36,7 @@ export default function CreateNote() {
       setColor("#ffffff");
       toast.success("Note created successfully");
       navigate("/notes");
-    }
-    if (!data.success) {
+    } else {
       toast.error(data.msg);
     }
   };

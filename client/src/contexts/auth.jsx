@@ -5,6 +5,7 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(localStorage.getItem("token") || null);
+  const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -14,7 +15,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const registerUser = async (userData) => {
-    const res = await fetch(`http://localhost:3000/api/v1/users/register`, {
+    const res = await fetch(`${apiUrl}/users/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -33,7 +34,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const loginUser = async (userData) => {
-    const res = await fetch(`http://localhost:3000/api/v1/users/login`, {
+    const res = await fetch(`${apiUrl}/users/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

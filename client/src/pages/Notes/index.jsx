@@ -10,6 +10,8 @@ export default function Notes() {
   const [loading, setLoading] = useState(true);
   const { user } = useAuth();
 
+  const apiUrl = import.meta.env.VITE_API_BASE_URL;
+
   const getAllNotes = async () => {
     try {
       const res = await fetch("http://localhost:3000/api/v1/notes", {
@@ -38,7 +40,7 @@ export default function Notes() {
 
   const handleDeleteNote = async (id) => {
     try {
-      const res = await fetch(`http://localhost:3000/api/v1/notes/${id}`, {
+      const res = await fetch(`${apiUrl}/notes/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
