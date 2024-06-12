@@ -8,20 +8,20 @@ import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 dotenv.config({
   path: "./config/.env",
 });
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cors());
-app.use(express.static(path.join(__dirname, "../client", "dist")));
+app.use(express.static(path.join(__dirname, "./client/dist")));
 
 // API Routes
 app.use("/api/v1/notes", notes);
@@ -29,14 +29,14 @@ app.use("/api/v1/users", users);
 
 // Fallback for SPA
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client", "dist", "index.html"));
+  res.sendFile(path.join(__dirname, "./client/dist/index.html"));
 });
 
 // Start server after connecting to DB
 const startServer = async () => {
   try {
     await connectDB();
-    app.listen(3000, () => {
+    app.listen(PORT, () => {
       console.log("Server started on port 3000");
     });
   } catch (error) {
