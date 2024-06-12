@@ -21,7 +21,7 @@ const app = express();
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cors());
-app.use(express.static(path.join(__dirname, "./client", "dist")));
+app.use(express.static(path.join(__dirname, "../client", "dist")));
 
 // API Routes
 app.use("/api/v1/notes", notes);
@@ -29,7 +29,7 @@ app.use("/api/v1/users", users);
 
 // Fallback for SPA
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "./client", "dist", "index.html"));
+  res.sendFile(path.join(__dirname, "../client", "dist", "index.html"));
 });
 
 // Start server after connecting to DB
